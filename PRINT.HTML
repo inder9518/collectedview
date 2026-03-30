@@ -9,9 +9,17 @@
     <style>
         /* Mobile menu toggle logic */
         #menu-toggle:checked ~ #mobile-menu { display: block; }
+        
+        /* Stop extra scrolling on mobile */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            height: 100%;
+        }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-gray-50 font-sans flex flex-col min-h-screen">
 
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-20 md:h-24">
@@ -44,27 +52,29 @@
         </div>
     </nav>
 
-    <header class="bg-gray-900 py-16 text-center text-white">
-        <h2 class="text-4xl font-serif mb-2 tracking-wide uppercase">PRINT YOUR MEMORIES</h2>
-        <p class="text-gray-400 max-w-lg mx-auto">Choose your favorite design and get it printed on high-quality frames.</p>
-    </header>
+    <main class="flex-grow">
+        <header class="bg-gray-900 py-16 text-center text-white">
+            <h2 class="text-4xl font-serif mb-2 tracking-wide uppercase">PRINT YOUR MEMORIES</h2>
+            <p class="text-gray-400 max-w-lg mx-auto px-4">Choose your favorite design and get it printed on high-quality frames.</p>
+        </header>
 
-    <section class="py-12 px-6 max-w-7xl mx-auto">
-        <div id="drive-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            <div id="loader" class="col-span-full text-center py-10">
-                <p class="text-gray-500 animate-pulse text-lg">Loading your masterpieces...</p>
+        <section class="py-12 px-6 max-w-7xl mx-auto">
+            <div id="drive-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <div id="loader" class="col-span-full text-center py-10">
+                    <p class="text-gray-500 animate-pulse text-lg">Loading your masterpieces...</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="bg-gray-900 text-white py-12 px-6 text-center">
-        <h3 class="text-2xl font-bold mb-4">Want a custom frame?</h3>
-        <p class="text-gray-400 mb-6 font-light">Contact us at: +91 95188 43849 | info@collectdview.com</p>
-        <div class="flex justify-center space-x-8 text-2xl mb-8">
+    <footer class="bg-gray-900 text-white py-6 px-6 text-center">
+        <h3 class="text-xl font-bold mb-2">Want a custom frame?</h3>
+        <p class="text-gray-400 text-sm mb-4">Contact: +91 95188 43849 | info@collectdview.com</p>
+        <div class="flex justify-center space-x-8 text-xl mb-4">
             <a href="#" class="hover:text-amber-500 transition"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://wa.me/919518843849" class="hover:text-amber-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
-        <p class="text-xs text-gray-500 border-t border-gray-800 pt-8 uppercase tracking-widest">© 2026 CollectdView. All rights reserved.</p>
+        <p class="text-xs text-gray-500 border-t border-gray-800 pt-4">© 2026 CollectdView. All rights reserved.</p>
     </footer>
 
     <script>
