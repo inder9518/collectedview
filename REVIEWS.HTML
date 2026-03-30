@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COLLECTEDVIEW | Frame Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        #menu-toggle:checked ~ #mobile-menu { display: block; }
+        html, body { margin: 0; padding: 0; overflow-x: hidden; }
+        .star-rating i { cursor: pointer; transition: color 0.2s; }
+        .text-amber-500 { color: #f59e0b !important; }
+        .text-gray-300 { color: #d1d5db !important; }
+
+        #custom-popup {
+            display: none;
+            animation: fadeInOut 2s ease-in-out forwards;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, 20px); }
+            15% { opacity: 1; transform: translate(-50%, 0); }
+            85% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -20px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans flex flex-col min-h-screen">
+
+    <div id="custom-popup" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] bg-gray-900 text-white px-6 py-3 rounded-full shadow-2xl border border-amber-500/50 flex items-center space-x-3">
+        <i class="fa-solid fa-circle-check text-amber-500"></i>
+        <span id="popup-message" class="text-sm font-bold tracking-wide">Review Submitted Successfully!</span>
+    </div>
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-20 md:h-24">
+            <div class="flex items-center h-full py-3">
+                <img src="1.png" alt="CollectdView Logo" class="h-full w-auto object-contain">
+            </div>
+            <ul class="hidden md:flex space-x-6 font-medium text-gray-600">
+                <li><a href="home.html" class="hover:text-amber-600 transition">Home</a></li>
+                <li><a href="PRINT.HTML" class="hover:text-amber-600 transition">Print</a></li>
+                <li><a href="GALLERY.HTML" class="hover:text-amber-600 transition">Gallery</a></li>
+                <li><a href="REVIEWS.HTML" class="hover:text-amber-600 transition">Reviews</a></li>
+            </ul>
+            <div class="md:hidden flex items-center">
+                <label for="menu-toggle" class="cursor-pointer text-2xl text-gray-800">
+                    <i class="fa-solid fa-bars"></i>
+                </label>
+            </div>
+        </div>
+        <input type="checkbox" id="menu-toggle" class="hidden">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t transition-all duration-300 shadow-inner">
+            <ul class="flex flex-col space-y-4 p-4 font-medium text-gray-600">
+                <li><a href="home.html" class="block hover:text-amber-600">Home</a></li>
+                <li><a href="PRINT.HTML" class="block hover:text-amber-600">Print</a></li>
+                <li><a href="GALLERY.HTML" class="block hover:text-amber-600">Gallery</a></li>
+                <li><a href="REVIEWS.HTML" class="block hover:text-amber-600">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <header class="relative h-[70vh] flex items-center justify-center text-center text-white">
+            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=2070" 
+                 alt="Frames Background" class="absolute inset-0 w-full h-full object-cover brightness-50">
+            <div class="relative z-10 px-4">
+                <h2 class="text-4xl md:text-6xl font-serif mb-4">Preserve Your Memories</h2>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Premium quality custom frames for your photos, art, and special moments.</p>
+                <a href="PRINT.HTML" class="bg-white text-gray-900 px-8 py-3 rounded-lg font-bold hover:bg-gray-200 transition">PRINT YOUR MEMORIES</a>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 bg-white max-w-2xl mx-auto my-8 rounded-2xl shadow-sm border border-gray-100">
+            <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">Leave a Review</h3>
+            <div class="space-y-4">
+                <input type="text" id="reviewerName" placeholder="Your Name" class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:outline-none transition text-gray-700">
+                <textarea id="reviewText" placeholder="Tell us about your experience..." class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:outline-none transition h-32 text-gray-700"></textarea>
+                
+                <div class="flex flex-col items-center space-y-3">
+                    <p class="text-gray-500 font-medium">Your Rating:</p>
+                    <div id="starContainer" class="star-rating text-3xl flex space-x-2">
+                        <i class="fa-solid fa-star text-gray-300" onclick="setRating(1)"></i>
+                        <i class="fa-solid fa-star text-gray-300" onclick="setRating(2)"></i>
+                        <i class="fa-solid fa-star text-gray-300" onclick="setRating(3)"></i>
+                        <i class="fa-solid fa-star text-gray-300" onclick="setRating(4)"></i>
+                        <i class="fa-solid fa-star text-gray-300" onclick="setRating(5)"></i>
+                    </div>
+                </div>
+
+                <button id="submitBtn" onclick="submitReview()" class="w-full bg-amber-600 text-white py-3 rounded-xl font-bold hover:bg-amber-700 transition shadow-md uppercase tracking-wider">
+                    SUBMIT REVIEW
+                </button>
+            </div>
+        </section>
+
+        <section id="displayReviews" class="max-w-4xl mx-auto px-6 mb-20">
+            <h3 class="text-xl font-bold text-gray-800 mb-8 border-l-4 border-amber-500 pl-3">Recent Reviews</h3>
+            <div id="reviewsWall" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <p class="text-gray-400 animate-pulse">Loading feedbacks...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="bg-gray-900 text-white py-6 px-6 text-center">
+        <p class="text-xs text-gray-500">&copy; 2026 CollectedView. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzKzP0wtUenLkLoQRzyN7ejiJ2bSYtJi_RCDY-eKCQVMvhEb7QPJymxBYQlUU_h-YJ1/exec';
+        let currentRating = 0;
+
+        function setRating(n) {
+            currentRating = n;
+            const stars = document.querySelectorAll('#starContainer i');
+            stars.forEach((star, index) => {
+                star.classList.toggle('text-amber-500', index < n);
+                star.classList.toggle('text-gray-300', index >= n);
+            });
+        }
+
+        function showPopup(msg) {
+            const popup = document.getElementById('custom-popup');
+            document.getElementById('popup-message').innerText = msg;
+            popup.style.display = 'flex';
+            setTimeout(() => { popup.style.display = 'none'; }, 2000);
+        }
+
+        async function fetchReviews() {
+            try {
+                const response = await fetch(WEB_APP_URL);
+                const reviews = await response.json();
+                const wall = document.getElementById('reviewsWall');
+                wall.innerHTML = reviews.map(r => `
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                        <div class="flex space-x-1 mb-2">
+                            ${Array.from({length: 5}, (_, i) => `<i class="fa-solid fa-star text-xs ${i < r.rating ? 'text-amber-500' : 'text-gray-200'}"></i>`).join('')}
+                        </div>
+                        <p class="text-gray-700 text-sm italic mb-3">"${r.text}"</p>
+                        <p class="text-gray-900 font-bold text-xs uppercase">— ${r.name}</p>
+                    </div>
+                `).join('') || '<p class="text-gray-400">No reviews yet.</p>';
+            } catch (e) { console.error("Error fetching reviews"); }
+        }
+
+        async function submitReview() {
+            const name = document.getElementById('reviewerName').value.trim();
+            const text = document.getElementById('reviewText').value.trim();
+            const btn = document.getElementById('submitBtn');
+
+            if (!name || !text || currentRating === 0) {
+                showPopup("Please fill all fields!");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "Submitting...";
+
+            try {
+                await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({ name, text, rating: currentRating })
+                });
+
+                showPopup("Thank you! Review Saved.");
+                document.getElementById('reviewerName').value = '';
+                document.getElementById('reviewText').value = '';
+                setRating(0);
+                setTimeout(fetchReviews, 1000); // 1 sec baad refresh
+            } catch (e) {
+                showPopup("Submission Failed!");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "SUBMIT REVIEW";
+            }
+        }
+
+        // Initial Load
+        fetchReviews();
+    </script>
+
+</body>
+</html>
