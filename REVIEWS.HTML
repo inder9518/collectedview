@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COLLECTEDVIEW | Frame Studio</title>
+    <title>REVIEWS | CollectdView</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         #menu-toggle:checked ~ #mobile-menu { display: block; }
         html, body { margin: 0; padding: 0; overflow-x: hidden; }
+        
+        /* Star classes */
         .star-rating i { cursor: pointer; transition: color 0.2s; }
         .text-amber-500 { color: #f59e0b !important; }
         .text-gray-300 { color: #d1d5db !important; }
 
+        /* Custom Popup Animation */
         #custom-popup {
             display: none;
             animation: fadeInOut 2s ease-in-out forwards;
@@ -61,13 +64,12 @@
     </nav>
 
     <main class="flex-grow">
-        <header class="relative h-[70vh] flex items-center justify-center text-center text-white">
+        <header class="relative h-[40vh] flex items-center justify-center text-center text-white">
             <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=2070" 
                  alt="Frames Background" class="absolute inset-0 w-full h-full object-cover brightness-50">
             <div class="relative z-10 px-4">
-                <h2 class="text-4xl md:text-6xl font-serif mb-4">Preserve Your Memories</h2>
-                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Premium quality custom frames for your photos, art, and special moments.</p>
-                <a href="PRINT.HTML" class="bg-white text-gray-900 px-8 py-3 rounded-lg font-bold hover:bg-gray-200 transition">PRINT YOUR MEMORIES</a>
+                <h2 class="text-4xl md:text-6xl font-serif mb-2 tracking-wide uppercase">Customer Reviews</h2>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto">See what our customers have to say about their framed memories.</p>
             </div>
         </header>
 
@@ -103,7 +105,13 @@
     </main>
 
     <footer id="contact" class="bg-gray-900 text-white py-6 px-6 text-center">
-        <p class="text-xs text-gray-500">&copy; 2026 CollectedView. All rights reserved.</p>
+        <h3 class="text-xl font-bold mb-2 text-white">Contact Us</h3>
+        <p class="text-gray-400 text-sm mb-4">Contact: +919518843849 | info@collectdview.com</p>
+        <div class="flex justify-center space-x-8 text-xl mb-4">
+            <a href="https://www.instagram.com/collected_view?igsh=d2IwZXk1MDY3bGd2&utm_source=qr" class="hover:text-amber-500 transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/919518843849" class="hover:text-amber-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="text-xs text-gray-500 border-t border-gray-800 pt-4">© 2026 CollectdView. All rights reserved.</p>
     </footer>
 
     <script>
@@ -167,7 +175,7 @@
                 document.getElementById('reviewerName').value = '';
                 document.getElementById('reviewText').value = '';
                 setRating(0);
-                setTimeout(fetchReviews, 1000); // 1 sec baad refresh
+                setTimeout(fetchReviews, 1000);
             } catch (e) {
                 showPopup("Submission Failed!");
             } finally {
@@ -176,9 +184,7 @@
             }
         }
 
-        // Initial Load
         fetchReviews();
     </script>
-
 </body>
 </html>
