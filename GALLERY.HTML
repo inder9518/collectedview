@@ -79,7 +79,7 @@
     </footer>
 
     <script>
-        const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbwh_EVeisrGXht_h0VV2qPJ807xuG8gFvZz8gnUMuHO1CW0zDzcTl0U3J2mnHBVu3c-/exec';
+        const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbyQSnEMZcpyJzcRUuVr4VsEarLjrB40wDZz5rtkG32qqt3opvN5TjsD-T_-XcF5Nz1rmA/exec';
 
         async function loadGallery() {
             const container = document.getElementById('drive-gallery');
@@ -106,7 +106,7 @@
                         container.innerHTML += card;
                     });
                 } else {
-                    loader.innerHTML = "No photos found in Drive folder.";
+                    loader.innerHTML = "No photos found.";
                 }
             } catch (error) {
                 console.error("Error:", error);
