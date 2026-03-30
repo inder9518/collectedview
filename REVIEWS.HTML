@@ -111,10 +111,38 @@
             <a href="https://www.instagram.com/collected_view?igsh=d2IwZXk1MDY3bGd2&utm_source=qr" class="hover:text-amber-500 transition"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://wa.me/919518843849" class="hover:text-amber-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
-        <p class="text-xs text-gray-500 border-t border-gray-800 pt-4">© 2026 CollectdView. All rights reserved.</p>
+        <p class="text-xs text-gray-500 border-t border-gray-800 pt-4">&copy; 2026 CollectedView. All rights reserved.</p>
     </footer>
 
     <script>
+        // --- Auto-close menu logic ---
+        const menuToggle = document.getElementById('menu-toggle');
+
+        function closeMenu() {
+            if (menuToggle && menuToggle.checked) {
+                menuToggle.checked = false;
+            }
+        }
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            if (nav && !nav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // Close when scrolling
+        window.addEventListener('scroll', () => {
+            closeMenu();
+        }, { passive: true });
+
+        // Close when coming back to page
+        window.addEventListener('pageshow', () => {
+            closeMenu();
+        });
+        // --- End of menu logic ---
+
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzKzP0wtUenLkLoQRzyN7ejiJ2bSYtJi_RCDY-eKCQVMvhEb7QPJymxBYQlUU_h-YJ1/exec';
         let currentRating = 0;
 

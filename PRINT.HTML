@@ -43,7 +43,7 @@
 <body class="bg-gray-50 font-sans flex flex-col min-h-screen">
 
     <div id="lightbox" onclick="closeLightbox()">
-        <button class="absolute top-5 right-5 text-white text-4xl">&times;</button>
+        <button class="absolute top-5 right-5 text-white text-4xl">×</button>
         <img id="lightbox-img" src="" alt="Enlarged view" onclick="event.stopPropagation()">
     </div>
 
@@ -104,6 +104,33 @@
     </footer>
 
     <script>
+        // Auto-close menu logic
+        const menuToggle = document.getElementById('menu-toggle');
+
+        function closeMenu() {
+            if (menuToggle.checked) {
+                menuToggle.checked = false;
+            }
+        }
+
+        // 1. Close when clicking outside
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            if (!nav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // 2. Close when scrolling/sliding
+        window.addEventListener('scroll', () => {
+            closeMenu();
+        }, { passive: true });
+
+        // 3. Close when coming back to page
+        window.addEventListener('pageshow', () => {
+            closeMenu();
+        });
+
         const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbz909fHFIk-Hk4L-d3OPfRmLg014B_oW2Ji-TzHm8QoZdjGgjCjMqSfYGnqnpRFU9MJ3w/exec';
         const WHATSAPP_NUMBER = '9518843849'; 
 
@@ -113,12 +140,12 @@
             const img = document.getElementById('lightbox-img');
             img.src = src;
             lightbox.style.display = 'flex';
-            document.body.classList.add('no-scroll'); // Lock background scroll
+            document.body.classList.add('no-scroll');
         }
 
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
-            document.body.classList.remove('no-scroll'); // Unlock scroll
+            document.body.classList.remove('no-scroll');
         }
 
         async function loadGallery() {
@@ -133,7 +160,7 @@
                     loader.style.display = 'none';
                     photos.forEach(photo => {
                         const photoName = photo.name.split('.')[0];
-                        const imgUrl = `https://lh3.googleusercontent.com/d/${photo.id}=w1000`; // High quality for lightbox
+                        const imgUrl = `https://lh3.googleusercontent.com/d/${photo.id}=w1000`;
                         
                         const card = `
                             <div class="group relative bg-white p-3 rounded-lg shadow-md border border-gray-100 hover:shadow-2xl transition duration-300 overflow-hidden flex flex-col">

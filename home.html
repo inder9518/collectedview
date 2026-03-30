@@ -128,5 +128,34 @@
         <p class="text-xs text-gray-500 border-t border-gray-800 pt-4">&copy; 2026 CollectedView. All rights reserved.</p>
     </footer>
 
+    <script>
+        // Auto-close menu logic
+        const menuToggle = document.getElementById('menu-toggle');
+
+        function closeMenu() {
+            if (menuToggle.checked) {
+                menuToggle.checked = false;
+            }
+        }
+
+        // 1. Close menu when clicking outside of the navbar
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            if (!nav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // 2. Close menu when scrolling or sliding the page
+        window.addEventListener('scroll', () => {
+            closeMenu();
+        }, { passive: true });
+
+        // 3. Close menu when navigating back to this page
+        window.addEventListener('pageshow', () => {
+            closeMenu();
+        });
+    </script>
+
 </body>
 </html>

@@ -43,6 +43,7 @@
         </div>
 
         <input type="checkbox" id="menu-toggle" class="hidden">
+        
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t transition-all duration-300 shadow-inner">
             <ul class="flex flex-col space-y-4 p-4 font-medium text-gray-600">
                 <li><a href="home.html" class="block hover:text-amber-600">Home</a></li>
@@ -79,6 +80,33 @@
     </footer>
 
     <script>
+        // Auto-close menu logic
+        const menuToggle = document.getElementById('menu-toggle');
+
+        function closeMenu() {
+            if (menuToggle.checked) {
+                menuToggle.checked = false;
+            }
+        }
+
+        // 1. Close when clicking anywhere outside the menu/navbar
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            if (!nav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // 2. Close when sliding/scrolling the page
+        window.addEventListener('scroll', () => {
+            closeMenu();
+        }, { passive: true });
+
+        // 3. Close when coming back to this page (pageshow event)
+        window.addEventListener('pageshow', () => {
+            closeMenu();
+        });
+
         const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbyQSnEMZcpyJzcRUuVr4VsEarLjrB40wDZz5rtkG32qqt3opvN5TjsD-T_-XcF5Nz1rmA/exec';
 
         async function loadGallery() {
